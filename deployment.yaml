@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mi-aplicacion-go-deployment
+  labels:
+    app: mi-aplicacion-go
+spec:
+  replicas: 3 # Número de réplicas que deseas ejecutar
+  selector:
+    matchLabels:
+      app: mi-aplicacion-go
+  template:
+    metadata:
+      labels:
+        app: mi-aplicacion-go
+    spec:
+      containers:
+      - name: mi-aplicacion-go
+        image: nombre-de-tu-imagen-go:latest # Cambia esto por el nombre de tu imagen Docker
+        ports:
+        - containerPort: 8080 # Puerto en el que tu aplicación escucha dentro del contenedor
+        env:
+        - name: TARGET_ENDPOINT
+          value: "http://example.com" # Cambia esto por el valor del endpoint de destino
+        - name: PORT
+          value: "8080" # Puerto en el que escucha tu aplicación dentro del contenedor
+
